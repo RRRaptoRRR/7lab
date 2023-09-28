@@ -41,13 +41,11 @@ public class ClientThread extends Thread{
                 if (user.isSignIn()){
                     if(dataBase.isUserRegistred(user)){
                         logger.log(Level.INFO, "Отправляем сообщение пользователю об успешном входе");
-                        //objectOutputStream.writeBoolean(true);
                         objectOutputStream.writeObject(true);
                         break;
                     }
                     else {
                         logger.log(Level.INFO, "Отправляем сообщение пользователю о неуспешном входе");
-                        //objectOutputStream.writeBoolean(false);
                         objectOutputStream.writeObject(false);
                     }
                 }
@@ -63,8 +61,6 @@ public class ClientThread extends Thread{
                     }
                 }
             }
-
-            //objectOutputStream.flush();
             Result result;
             Command command;
             while (true){
