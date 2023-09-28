@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="i hopre that's all" />
+    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/managers/Entrance.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/managers/Entrance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/managers/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/managers/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/DataBase.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +44,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "openjdk-20",
-    "last_opened_file_path": "D:/Итмо/Программирование/7лаба/postgresql-42.6.0.jar",
+    "last_opened_file_path": "D:/Итмо/Программирование/7лаба",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -103,7 +110,8 @@
       <workItem from="1694602915388" duration="2066000" />
       <workItem from="1694606638272" duration="50984000" />
       <workItem from="1695371994360" duration="7432000" />
-      <workItem from="1695679875591" duration="38599000" />
+      <workItem from="1695679875591" duration="40235000" />
+      <workItem from="1695892579783" duration="539000" />
     </task>
     <task id="LOCAL-00001" summary="sending a command to the server with a stream">
       <created>1694685802101</created>

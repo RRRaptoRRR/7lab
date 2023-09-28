@@ -38,7 +38,7 @@ public class Entrance {
 
         objectOutputStream.writeObject(user);
         //objectOutputStream.flush();
-        System.out.println("Я дошел до получения result");
+        //System.out.println("Я дошел до получения result");
         boolean result = false;
         try {
             result = (boolean) objectInputStream.readObject();
@@ -47,7 +47,7 @@ public class Entrance {
             System.out.println("blya");
         }
 
-        System.out.println("Я получил result");
+        //System.out.println("Я получил result");
         if(result){
             System.out.println("Вы успешно вошли в систему");
         }
@@ -63,6 +63,22 @@ public class Entrance {
         User user = new User(login, password, false);
 
         objectOutputStream.writeObject(user);
+        boolean result = false;
+        try {
+            result = (boolean) objectInputStream.readObject();
+        }
+        catch (ClassNotFoundException ex) {
+            System.out.println("blya");
+        }
+
+        //System.out.println("Я получил result");
+        if(result){
+            System.out.println("Вы зарегистрировались");
+        }
+        else {
+            System.out.println("Пользователь с таким логином уже существует");
+            start();
+        }
         //objectOutputStream.flush();
     }
 

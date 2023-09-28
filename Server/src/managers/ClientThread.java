@@ -33,21 +33,37 @@ public class ClientThread extends Thread{
             logger.log(Level.INFO, "Соединение пользователя с сервером установлено");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            user = (User) objectInputStream.readObject();
 
-            if (user.isSignIn()){
-                if(dataBase.isUserRegistred(user)){
-                    logger.log(Level.INFO, "Отправляем сообщение пользователю об успешном входе");
-                    //objectOutputStream.writeBoolean(true);
-                    objectOutputStream.writeObject(true);
+
+            boolean flag=false;
+            while (true){
+                user = (User) objectInputStream.readObject();
+                if (user.isSignIn()){
+                    if(dataBase.isUserRegistred(user)){
+                        logger.log(Level.INFO, "Отправляем сообщение пользователю об успешном входе");
+                        //objectOutputStream.writeBoolean(true);
+                        objectOutputStream.writeObject(true);
+                        break;
+                    }
+                    else {
+                        logger.log(Level.INFO, "Отправляем сообщение пользователю о неуспешном входе");
+                        //objectOutputStream.writeBoolean(false);
+                        objectOutputStream.writeObject(false);
+                    }
                 }
                 else {
-                    logger.log(Level.INFO, "Отправляем сообщение пользователю о неуспешном входе");
-                    //objectOutputStream.writeBoolean(false);
-                    objectOutputStream.writeObject(false);
+                    if(dataBase.toRegistreUser(user)){
+                        logger.log(Level.INFO, "Пользователь успешно зарегестрирован");
+                        objectOutputStream.writeObject(true);
+                        break;
+                    }
+                    else {
+                        logger.log(Level.INFO, "Данный пользователь уже зарегистрирован");
+                        objectOutputStream.writeObject(false);
+                    }
                 }
             }
-            else dataBase.toRegistreUser(user);
+
             //objectOutputStream.flush();
             Result result;
             Command command;

@@ -56,16 +56,20 @@ public class DataBase {
         return false;
     }
 
-    public void toRegistreUser(User user)throws SQLException{
-
-        PreparedStatement preparedStatement = connection.prepareStatement(ADD_USER_REQUEST);
-        preparedStatement.setString(1, user.getUsername());
-        preparedStatement.setString(2, user.getPassword());
-        //Statement statement = connection.createStatement();
-        int rows = preparedStatement.executeUpdate();
-        if(rows==0){
-            logger.log(Level.INFO, "Данный пользователь уже зарегистрирован");
+    public boolean toRegistreUser(User user){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(ADD_USER_REQUEST);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            //Statement statement = connection.createStatement();
+            int rows = preparedStatement.executeUpdate();
+            logger.log(Level.INFO, "Пользователь " + user.getUsername() + " теперь зарегистрирован");
+            return true;
         }
-        logger.log(Level.INFO, "Пользователь " + user.getUsername() + " теперь зарегистрирован");
+        catch (SQLException ex){
+            logger.log(Level.INFO, "Данный пользователь уже зарегистрирован");
+            return false;
+        }
+
     }
 }
