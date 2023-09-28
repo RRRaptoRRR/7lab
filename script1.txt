@@ -1,0 +1,11 @@
+add
+1
+2
+3
+4
+hard
+5
+6
+7
+show
+execute_script D://Итмо/Программирование/6лаба/script2.txt

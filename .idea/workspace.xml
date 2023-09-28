@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="i hopre that's all" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2VIzzdEJbv2maPjW8xqaOc7ipaR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-20",
+    "last_opened_file_path": "D:/Итмо/Программирование/7лаба/postgresql-42.6.0.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.build",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Итмо\Программирование\6лаба\Server\src" />
+      <recent name="D:\Итмо\Программирование\6лаба\Client\src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="data" />
+      <recent name="managers" />
+      <recent name="commands" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client" />
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="Server" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/../../..//Итмо/Программирование/6лаба/default.csv" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.Client" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Client" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="" />
+      <created>1694538646996</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1694538646996</updated>
+      <workItem from="1694538648043" duration="5775000" />
+      <workItem from="1694602915388" duration="2066000" />
+      <workItem from="1694606638272" duration="50984000" />
+      <workItem from="1695371994360" duration="7432000" />
+      <workItem from="1695679875591" duration="38599000" />
+    </task>
+    <task id="LOCAL-00001" summary="sending a command to the server with a stream">
+      <created>1694685802101</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1694685802101</updated>
+    </task>
+    <task id="LOCAL-00002" summary="sending a command to the server with a stream">
+      <created>1694685823469</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1694685823469</updated>
+    </task>
+    <task id="LOCAL-00003" summary="sending command to server and getting answer from server">
+      <created>1694731621642</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694731621642</updated>
+    </task>
+    <task id="LOCAL-00004" summary="4 commands: help, info, show, add">
+      <created>1694733303077</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1694733303077</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update command">
+      <created>1694777812219</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1694777812219</updated>
+    </task>
+    <task id="LOCAL-00006" summary="remove_by_id command">
+      <created>1694781505937</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1694781505937</updated>
+    </task>
+    <task id="LOCAL-00007" summary="clear and exit">
+      <created>1694782530148</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1694782530148</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add_if_max">
+      <created>1694786154668</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1694786154668</updated>
+    </task>
+    <task id="LOCAL-00009" summary="normal id labwork">
+      <created>1694792434324</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1694792434324</updated>
+    </task>
+    <task id="LOCAL-00010" summary="all commands, without script">
+      <created>1694798911199</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1694798911199</updated>
+    </task>
+    <task id="LOCAL-00011" summary="script, save and read">
+      <created>1694823064794</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1694823064794</updated>
+    </task>
+    <task id="LOCAL-00012" summary="i think that's all">
+      <created>1694824480690</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1694824480690</updated>
+    </task>
+    <task id="LOCAL-00013" summary="i hopre that's all">
+      <created>1694827697844</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1694827697844</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="sending a command to the server with a stream" />
+    <MESSAGE value="sending command to server and getting answer from server" />
+    <MESSAGE value="4 commands: help, info, show, add" />
+    <MESSAGE value="update command" />
+    <MESSAGE value="remove_by_id command" />
+    <MESSAGE value="clear and exit" />
+    <MESSAGE value="add_if_max" />
+    <MESSAGE value="normal id labwork" />
+    <MESSAGE value="all commands, without script" />
+    <MESSAGE value="script, save and read" />
+    <MESSAGE value="i think that's all" />
+    <MESSAGE value="i hopre that's all" />
+    <option name="LAST_COMMIT_MESSAGE" value="i hopre that's all" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Client/src/managers/ConsoleManager.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
