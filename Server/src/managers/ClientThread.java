@@ -20,12 +20,15 @@ public class ClientThread extends Thread{
     private User user;
 
     private DataBase dataBase;
-    public ClientThread(String name, Socket socket, CommandManager commandManager, DataBase dataBase){
+
+    private CollectionManager collectionManager;
+    public ClientThread(String name, Socket socket,  DataBase dataBase, CollectionManager collectionManager){//public ClientThread(String name, Socket socket, CommandManager commandManager, DataBase dataBase){
         super(name);
         this.socket = socket;
         logger = Logger.getLogger(ClientThread.class.getName());
-        this.commandManager = commandManager;
+        this.collectionManager = collectionManager;
         this.dataBase = dataBase;
+
     }
 
     public void run(){
@@ -61,6 +64,7 @@ public class ClientThread extends Thread{
                     }
                 }
             }
+            this.commandManager = new CommandManager(collectionManager, "", dataBase, user);
             Result result;
             Command command;
             while (true){

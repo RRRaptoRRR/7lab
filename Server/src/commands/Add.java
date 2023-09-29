@@ -7,7 +7,9 @@ import data.Person;
 import exceptions.InvalidInputException;
 import exceptions.InvalidInputRangeException;
 import managers.CollectionManager;
+import managers.DataBase;
 import managers.Result;
+import managers.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,13 +18,15 @@ public class Add extends AbstractCollectionCommand{
 
     //private CollectionManager collectionManager;
 
-    public Add(CollectionManager collectionManager){
-        super("add", "add labwork to collection", collectionManager);
+
+    public Add(CollectionManager collectionManager, DataBase dataBase){
+        super("add", "add labwork to collection", collectionManager, dataBase);
         //this.collectionManager = collectionManager;
     }
 
     @Override
-    public Result execute(String args, LabWork labWork){
+    public Result execute(String args, LabWork labWork, User user){
+        dataBase.addLabworkToDB(labWork, user);
         this.collectionManager.add(labWork);
         return new Result("Labwork был успешно добавлен в коллекцию", true);
     }

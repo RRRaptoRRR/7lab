@@ -20,7 +20,7 @@ public class DataBase {
 
     private static final String ADD_USER_REQUEST = "INSERT INTO users  VALUES (nextval('user_seq'), ?, ?)";
 
-    private static final String ADD_LABWORK_REQUEST = "INSERT INTO labworks VALUES(nextval('labwork_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?))";//"INSERT INTO labworks(name, x, y, time, minimalPoint, difficulty, person_name, height, weight, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?))";
+    private static final String ADD_LABWORK_REQUEST = "INSERT INTO labworks VALUES(nextval('labwork_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";//"INSERT INTO labworks(name, x, y, time, minimalPoint, difficulty, person_name, height, weight, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?))";
     private static final String USER_ID_REQUEST = "SELECT id FROM users WHERE username = ?";
 
     private static final String CHECK_USER_REQUEST = "SELECT id FROM users WHERE username = ? AND password = ?";
@@ -88,6 +88,7 @@ public class DataBase {
 
     public void addLabworkToDB(LabWork labWork, User user){
         try {
+            logger.log(Level.INFO, "Получена команда на добавление labwork в БД");
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_LABWORK_REQUEST);
             preparedStatement.setString(1, labWork.getName());
             preparedStatement.setInt(2, labWork.getCoordinates().getX());
@@ -99,9 +100,13 @@ public class DataBase {
             preparedStatement.setLong(8, labWork.getAuthor().getHeight());
             preparedStatement.setLong(9, labWork.getAuthor().getHeight());
             preparedStatement.setInt(10, user.getId());
+            preparedStatement.executeUpdate();
+            logger.log(Level.INFO, "Команда на добавление labwork в БД выполнена успешно");
         }
         catch (SQLException ex){
             logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO, "Команда на добавление labwork в БД не выполнена");
+
         }
 
     }

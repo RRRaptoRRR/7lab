@@ -2,16 +2,18 @@ package commands;
 
 import data.LabWork;
 import managers.CollectionManager;
+import managers.DataBase;
 import managers.Result;
+import managers.User;
 
 public class RemoveById extends AbstractCollectionCommand{
 
-    public RemoveById (CollectionManager collectionManager){
-        super("remove_by_id", "remove labwork from collection by id", collectionManager);
+    public RemoveById (CollectionManager collectionManager, DataBase dataBase){
+        super("remove_by_id", "remove labwork from collection by id", collectionManager, dataBase);
     }
 
     @Override
-    public Result execute(String args, LabWork labWork){
+    public Result execute(String args, LabWork labWork, User user){
         try{
             if (args!=null){
                 if (this.collectionManager.getSize()!=0){

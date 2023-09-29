@@ -2,16 +2,18 @@ package commands;
 
 import data.LabWork;
 import managers.CollectionManager;
+import managers.DataBase;
 import managers.Result;
+import managers.User;
 
 public class RemoveAnyByMinimalPoint extends AbstractCollectionCommand{
 
-    public RemoveAnyByMinimalPoint(CollectionManager collectionManager){
-        super("remove_any_by_minimal_point", "remove_any_by_minimal_point",  collectionManager);
+    public RemoveAnyByMinimalPoint(CollectionManager collectionManager, DataBase dataBase){
+        super("remove_any_by_minimal_point", "remove_any_by_minimal_point",  collectionManager, dataBase);
     }
 
     @Override
-    public Result execute(String args, LabWork labWork){
+    public Result execute(String args, LabWork labWork, User user){
         try {
             if(args!=null){
                 if (collectionManager.getSize()!=0){

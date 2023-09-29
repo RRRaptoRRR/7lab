@@ -25,12 +25,14 @@ public class Server {
             logger.log(Level.INFO, "Создание серверного сокета");
             CollectionManager collectionManager = new CollectionManager();
             Save save = new Save(collectionManager);
-            CommandManager commandManager = new CommandManager(collectionManager, path);
+            //CommandManager commandManager = new CommandManager(collectionManager, path);
             DataBase dataBase = new DataBase("jdbc:postgresql://localhost:8080/studs", "s367128", "DzK7sCDJAPOPvHrb");
             dataBase.connectionToDataBase();
+
             while (true){
                 Socket socket = serverSocket.accept();
-                new ClientThread("client", socket, commandManager, dataBase).start();
+                new ClientThread("client", socket, dataBase, collectionManager).start();
+                //new ClientThread("client", socket, commandManager, dataBase).start();
             }
             /*Socket socket = serverSocket.accept();
             logger.log(Level.INFO, "Соединение пользователя с сервером установлено");

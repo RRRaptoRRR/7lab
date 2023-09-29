@@ -18,7 +18,7 @@
       <ssh-properties>
         <enabled>true</enabled>
         <ssh-config-id>63c397a5-f209-433f-8ecd-721a1fd04020</ssh-config-id>
-        <local-port>8008</local-port>
+        <local-port>8009</local-port>
       </ssh-properties>
     </data-source>
   </component>

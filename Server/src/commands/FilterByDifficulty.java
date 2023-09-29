@@ -3,18 +3,20 @@ package commands;
 import data.Difficulty;
 import data.LabWork;
 import managers.CollectionManager;
+import managers.DataBase;
 import managers.Result;
+import managers.User;
 
 import java.util.ArrayList;
 
 public class FilterByDifficulty extends AbstractCollectionCommand{
 
-    public FilterByDifficulty(CollectionManager collectionManager){
-        super("filter_by_difficulty difficulty", "show all labworls from collection, where difficulty is thr same", collectionManager);
+    public FilterByDifficulty(CollectionManager collectionManager, DataBase dataBase){
+        super("filter_by_difficulty difficulty", "show all labworls from collection, where difficulty is the same", collectionManager, dataBase);
     }
 
     @Override
-    public Result execute(String args, LabWork labWork) {
+    public Result execute(String args, LabWork labWork, User user) {
         if (args!=null){
             if (collectionManager.getSize()!=0){
                 Difficulty difficult = Difficulty.HARD;

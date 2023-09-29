@@ -7,18 +7,20 @@ import data.Person;
 import exceptions.InvalidInputException;
 import exceptions.InvalidInputRangeException;
 import managers.CollectionManager;
+import managers.DataBase;
 import managers.Result;
+import managers.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class AddIfMin extends AbstractCollectionCommand{
-    public AddIfMin(CollectionManager collectionManager){
-        super("add_if_min", "add to collection, if this labwork has min minimalPoint", collectionManager);
+    public AddIfMin(CollectionManager collectionManager, DataBase dataBase){
+        super("add_if_min", "add to collection, if this labwork has min minimalPoint", collectionManager, dataBase);
     }
 
     @Override
-    public Result execute(String args, LabWork labWork){
+    public Result execute(String args, LabWork labWork, User user){
         if (labWork.getMinimalPoint()<collectionManager.getMinByPoints()){
             collectionManager.add(labWork);
             return new Result("labwork успешно добавлен", true);

@@ -7,7 +7,9 @@ import data.Person;
 import exceptions.InvalidInputException;
 import exceptions.InvalidInputRangeException;
 import managers.CollectionManager;
+import managers.DataBase;
 import managers.Result;
+import managers.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,13 +18,13 @@ public class Update extends AbstractCollectionCommand{
 
     //private CollectionManager collectionManager;
 
-    public Update(CollectionManager collectionManager){
-        super("update", "update labwork in collection by id", collectionManager);
+    public Update(CollectionManager collectionManager, DataBase dataBase){
+        super("update", "update labwork in collection by id", collectionManager, dataBase);
         //this.collectionManager = collectionManager;
     }
 
     @Override
-    public Result execute(String args, LabWork labWork){
+    public Result execute(String args, LabWork labWork, User user){
         try {
             if(args!=null){
                 if (collectionManager.getSize()!=0){

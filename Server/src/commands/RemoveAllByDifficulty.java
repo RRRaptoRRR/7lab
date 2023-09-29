@@ -3,18 +3,20 @@ package commands;
 import data.Difficulty;
 import data.LabWork;
 import managers.CollectionManager;
+import managers.DataBase;
 import managers.Result;
+import managers.User;
 
 import java.util.ArrayList;
 
 public class RemoveAllByDifficulty extends AbstractCollectionCommand {
 
-    public RemoveAllByDifficulty(CollectionManager collectionManager){
-        super("remove_all_by_difficulty", "remove all labwork from collection, which have same difficulty", collectionManager);
+    public RemoveAllByDifficulty(CollectionManager collectionManager, DataBase dataBase){
+        super("remove_all_by_difficulty", "remove all labwork from collection, which have same difficulty", collectionManager, dataBase);
     }
 
     @Override
-    public Result execute(String args, LabWork labWork){
+    public Result execute(String args, LabWork labWork, User user){
         if (args!= null){
             if (collectionManager.getSize()!=0){
                 Difficulty difficult = Difficulty.HARD;

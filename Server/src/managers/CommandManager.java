@@ -13,14 +13,8 @@ import java.util.ArrayList;
 public class CommandManager {
 
     private ArrayList<String> hist;
-
-
-
     private ArrayList<String> scriptHist;
     private CollectionManager collectionManager;
-    //private ConsoleManager consoleManager;
-    //private DataAsker dataAsker;
-
     private Add add;
     private Help help;
     private Info info;
@@ -28,54 +22,50 @@ public class CommandManager {
     private Update update;
     private RemoveById removeById;
     private Clear clear;
-    //
     private Exit exit;
     private AddIfMax addIfMax;
     private AddIfMin addIfMin;
-
     private History history;
     private RemoveAllByDifficulty removeAllByDifficulty;
     private RemoveAnyByMinimalPoint removeAnyByMinimalPoint;
-
     private FilterByDifficulty filterByDifficulty;
-
     private Read read;
-
     private Save save;
-
     private ExecuteScript executeScript;
 
-    //private InputStream inputStream;
+    private DataBase dataBase;
 
+    private User user;
 
-    public CommandManager(CollectionManager collectionManager, String path){//, ConsoleManager consoleManager){
+    public CommandManager(CollectionManager collectionManager, String path, DataBase dataBase, User user){//, ConsoleManager consoleManager){
         hist = new ArrayList<String>();
         scriptHist = new ArrayList<String>();
         this.collectionManager=collectionManager;
+        this.dataBase = dataBase;
+        this.user = user;
         //this.inputStream = inputStream;
         //this.consoleManager=consoleManager;
         //this.dataAsker=new DataAsker(consoleManager);
-        this.add = new Add(collectionManager);
+        this.add = new Add(collectionManager, dataBase);
         this.help = new Help();
         this.info = new Info(collectionManager);
         this.show = new Show(collectionManager);
-        this.update = new Update(collectionManager);
-        this.removeById = new RemoveById(collectionManager);
-        this.clear = new Clear(collectionManager);
+        this.update = new Update(collectionManager, dataBase);
+        this.removeById = new RemoveById(collectionManager, dataBase);
+        this.clear = new Clear(collectionManager, dataBase);
         this.read = new Read(collectionManager);
         this.save = new Save(collectionManager);
 
 
         this.exit = new Exit(collectionManager);
-        this.addIfMax = new AddIfMax(collectionManager);
-        this.addIfMin = new AddIfMin(collectionManager);
+        this.addIfMax = new AddIfMax(collectionManager, dataBase);
+        this.addIfMin = new AddIfMin(collectionManager, dataBase);
         this.history = new History(hist);
-        this.removeAllByDifficulty = new RemoveAllByDifficulty(collectionManager);
-        this.removeAnyByMinimalPoint = new RemoveAnyByMinimalPoint(collectionManager);
-        this.filterByDifficulty = new FilterByDifficulty(collectionManager);
+        this.removeAllByDifficulty = new RemoveAllByDifficulty(collectionManager, dataBase);
+        this.removeAnyByMinimalPoint = new RemoveAnyByMinimalPoint(collectionManager, dataBase);
+        this.filterByDifficulty = new FilterByDifficulty(collectionManager, dataBase);
 
         this.executeScript = new ExecuteScript(collectionManager, this);
-
         read.execute(path);
     }
 
@@ -89,22 +79,22 @@ public class CommandManager {
             case "help": hist.add(help.getName()); return help.execute(args);
             case "info": hist.add(info.getName()); return info.execute(args);
             case "show": hist.add(show.getName()); return show.execute(args);
-            case "add": hist.add(add.getName()); return add.execute(args, labWork);
-            case "update": hist.add(update.getName()); return update.execute(args, labWork);
-            case "remove_by_id": hist.add(removeById.getName()); return removeById.execute(args, labWork);
-            case "clear": hist.add(clear.getName()); return clear.execute(args, labWork);
+            case "add": hist.add(add.getName()); return add.execute(args, labWork, user);
+            case "update": hist.add(update.getName()); return update.execute(args, labWork, user);
+            case "remove_by_id": hist.add(removeById.getName()); return removeById.execute(args, labWork, user);
+            case "clear": hist.add(clear.getName()); return clear.execute(args, labWork, user);
             //case "read": read.execute(args); hist.add(read.getName()); break;
             // case "save": save.execute(args); hist.add(save.getName()); break;
             case "execute_script": scriptHist.add(args); hist.add(executeScript.getName()); return executeScript.execute(args);
             //break;
 
             case "exit": hist.add(exit.getName()); return exit.execute(args);
-            case "add_if_max": hist.add(addIfMax.getName()); return addIfMax.execute(args, labWork);
-            case "add_if_min": hist.add(addIfMin.getName()); return addIfMin.execute(args, labWork);
+            case "add_if_max": hist.add(addIfMax.getName()); return addIfMax.execute(args, labWork, user);
+            case "add_if_min": hist.add(addIfMin.getName()); return addIfMin.execute(args, labWork, user);
             case "history": hist.add(history.getName()); return history.execute(args);
-            case "remove_all_by_difficulty": hist.add(removeAllByDifficulty.getName()); return removeAllByDifficulty.execute(args, labWork);
-            case "remove_any_by_minimal_point": hist.add(removeAnyByMinimalPoint.getName()); return removeAnyByMinimalPoint.execute(args, labWork);
-            case "filter_by_difficulty":  hist.add(filterByDifficulty.getName()); return filterByDifficulty.execute(args, labWork);
+            case "remove_all_by_difficulty": hist.add(removeAllByDifficulty.getName()); return removeAllByDifficulty.execute(args, labWork, user);
+            case "remove_any_by_minimal_point": hist.add(removeAnyByMinimalPoint.getName()); return removeAnyByMinimalPoint.execute(args, labWork, user);
+            case "filter_by_difficulty":  hist.add(filterByDifficulty.getName()); return filterByDifficulty.execute(args, labWork, user);
             default:
                 return new Result("Команда не распознана" +
                         "Введите help, чтобы узнать доступные команды", true);
@@ -120,8 +110,8 @@ public class CommandManager {
             case "show":  hist.add(show.getName()); return show.execute(args).getMessage();
             case "add":  hist.add(add.getName()); return add.executeFromScript(args, csvReader);
             case "update":  hist.add(update.getName()); return update.executeFromScript(args, csvReader);
-            case "remove_by_id":  hist.add(removeById.getName()); return removeById.execute(args, labWork).getMessage();
-            case "clear":  hist.add(clear.getName()); return clear.execute(args, labWork).getMessage();
+            case "remove_by_id":  hist.add(removeById.getName()); return removeById.execute(args, labWork, user).getMessage();
+            case "clear":  hist.add(clear.getName()); return clear.execute(args, labWork, user).getMessage();
             //case "read": read.execute(args); hist.add(read.getName()); break;
             //case "save": save.execute(args); hist.add(read.getName()); break;
             case "execute_script":
@@ -146,9 +136,9 @@ public class CommandManager {
             case "add_if_max":  hist.add(addIfMin.getName()); return addIfMax.executeFromScript(args, csvReader);
             case "add_if_min":  hist.add(addIfMax.getName()); return addIfMin.executeFromScript(args, csvReader);
             case "history":  hist.add(history.getName()); return history.execute(args).getMessage();
-            case "remove_all_by_difficulty":  hist.add(removeAllByDifficulty.getName()); return removeAllByDifficulty.execute(args, labWork).getMessage();
-            case "remove_any_by_minimal_point":  hist.add(removeAnyByMinimalPoint.getName()); return removeAnyByMinimalPoint.execute(args, labWork).getMessage();
-            case "filter_by_difficulty":  hist.add(filterByDifficulty.getName()); return filterByDifficulty.execute(args, labWork).getMessage();
+            case "remove_all_by_difficulty":  hist.add(removeAllByDifficulty.getName()); return removeAllByDifficulty.execute(args, labWork, user).getMessage();
+            case "remove_any_by_minimal_point":  hist.add(removeAnyByMinimalPoint.getName()); return removeAnyByMinimalPoint.execute(args, labWork, user).getMessage();
+            case "filter_by_difficulty":  hist.add(filterByDifficulty.getName()); return filterByDifficulty.execute(args, labWork, user).getMessage();
             default:
                 return ("Команда не распознана" +
                         "Введите help, чтобы узнать доступные команды");
