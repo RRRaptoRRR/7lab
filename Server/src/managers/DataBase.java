@@ -1,9 +1,15 @@
 package managers;
 
+import data.Coordinates;
+import data.Difficulty;
 import data.LabWork;
+import data.Person;
+import exceptions.InvalidInputException;
 import org.postgresql.util.MD5Digest;
 
 import java.sql.*;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,22 +22,29 @@ public class DataBase {
     private String adminUsername;
     private String adminPassword;
 
+    private CollectionManager collectionManager;
+
 
 
     private static final String ADD_USER_REQUEST = "INSERT INTO users  VALUES (nextval('user_seq'), ?, ?)";
 
-    private static final String ADD_LABWORK_REQUEST = "INSERT INTO labworks VALUES(nextval('labwork_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";//"INSERT INTO labworks(name, x, y, time, minimalPoint, difficulty, person_name, height, weight, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?))";
+    private static final String ADD_LABWORK_REQUEST = "INSERT INTO labworks VALUES(nextval('labwork_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    private static final String READ_DB = "SELECT * FROM labworks;";
     private static final String USER_ID_REQUEST = "SELECT id FROM users WHERE username = ?";
 
     private static final String CHECK_USER_REQUEST = "SELECT id FROM users WHERE username = ? AND password = ?";
 
     private static final String DELETE_USER_REQUEST = "DROP FROM users WHERE username = ?";
 
-    public DataBase(String url, String username, String password){
+    private static final String DELETE_ALL_lABWORKS_BY_USER_ID_REQUEST = "DELETE FROM labworks WHERE user_id = ?";
+
+    public DataBase(String url, String username, String password, CollectionManager collectionManager){
         this.URL = url;
         this.adminUsername = username;
         this.adminPassword = password;
         logger = Logger.getLogger(DataBase.class.getName());
+        this.collectionManager = collectionManager;
     }
 
     public void connectionToDataBase(){
@@ -44,9 +57,39 @@ public class DataBase {
         }
     }
 
-    public String read(){
-        String answer="";
-        return answer;
+    public Boolean readToCollection(){
+        try {
+            logger.log(Level.INFO, "Начинаю читать данные из БД");
+            PreparedStatement preparedStatement = connection.prepareStatement(READ_DB);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                long id = (long) resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                Coordinates coordinates = new Coordinates(resultSet.getInt(3), resultSet.getInt(4));
+                ZonedDateTime zonedDateTime = resultSet.getTimestamp(5).toLocalDateTime().atZone(ZoneId.systemDefault());
+                Float minimalPoint = resultSet.getFloat(6);
+                String difficult = resultSet.getString(7).toUpperCase();
+                Difficulty Difficult = Difficulty.HARD;
+                switch (difficult){
+                    case "VERY_EASY": Difficult = Difficulty.VERY_EASY; break;
+                    case "HARD": Difficult = Difficulty.HARD; break;
+                    case "IMPOSSIBLE": Difficult = Difficulty.IMPOSSIBLE; break;
+                    case "TERRIBLE": Difficult = Difficulty.TERRIBLE; break;
+                    default:
+                        Difficult = Difficulty.HARD;
+                }
+                Person person = new Person(resultSet.getString(8), resultSet.getLong(9), resultSet.getInt(10));
+                LabWork labWork = new LabWork(id, name, coordinates, zonedDateTime, minimalPoint, Difficult, person);
+                collectionManager.add(labWork);
+            }
+            logger.log(Level.INFO, "Прочитал данные из БД");
+            return true;
+        }
+        catch (SQLException ex){
+            logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO, "Не удалось прочитать данные из БД");
+            return false;
+        }
     }
 
     public boolean isUserRegistred(User user) throws SQLException{
@@ -86,7 +129,23 @@ public class DataBase {
         }
     }
 
-    public void addLabworkToDB(LabWork labWork, User user){
+    public boolean removeLabworkFromDB(LabWork labWork, User user){
+        try {
+            logger.log(Level.INFO, "Получена команда на очистку labworks в БД");
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ALL_lABWORKS_BY_USER_ID_REQUEST);
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.executeUpdate();
+            logger.log(Level.INFO, "Команда на удаление labworks в БД выполнена успешно");
+            return true;
+        }
+        catch (SQLException ex){
+            logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO, "Команда на удаление labwork в БД не выполнена");
+            return false;
+        }
+    }
+
+    public boolean addLabworkToDB(LabWork labWork, User user){
         try {
             logger.log(Level.INFO, "Получена команда на добавление labwork в БД");
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_LABWORK_REQUEST);
@@ -102,11 +161,12 @@ public class DataBase {
             preparedStatement.setInt(10, user.getId());
             preparedStatement.executeUpdate();
             logger.log(Level.INFO, "Команда на добавление labwork в БД выполнена успешно");
+            return true;
         }
         catch (SQLException ex){
             logger.log(Level.INFO, ex.getMessage());
             logger.log(Level.INFO, "Команда на добавление labwork в БД не выполнена");
-
+            return false;
         }
 
     }

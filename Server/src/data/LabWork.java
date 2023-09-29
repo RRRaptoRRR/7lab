@@ -23,6 +23,17 @@ public class LabWork implements Comparable<LabWork>, Serializable {
         this.author=author;
     }
 
+    public LabWork(long id, String name, Coordinates coordinates, ZonedDateTime zonedDateTime, Float minimalPoint, Difficulty difficulty, Person author){
+        this.id=id;
+        //StaticId+=1;
+        this.name=name;
+        this.coordinates =coordinates;
+        this.creationDate=zonedDateTime;
+        this.minimalPoint=minimalPoint;
+        this.difficulty=difficulty;
+        this.author=author;
+    }
+
     public long getId() {return id;}
 
     public static void reduceId(){ StaticId-=1;}

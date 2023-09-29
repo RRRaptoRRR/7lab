@@ -26,8 +26,9 @@ public class Server {
             CollectionManager collectionManager = new CollectionManager();
             Save save = new Save(collectionManager);
             //CommandManager commandManager = new CommandManager(collectionManager, path);
-            DataBase dataBase = new DataBase("jdbc:postgresql://localhost:8080/studs", "s367128", "DzK7sCDJAPOPvHrb");
+            DataBase dataBase = new DataBase("jdbc:postgresql://localhost:8080/studs", "s367128", "DzK7sCDJAPOPvHrb", collectionManager);
             dataBase.connectionToDataBase();
+            dataBase.readToCollection();
 
             while (true){
                 Socket socket = serverSocket.accept();
