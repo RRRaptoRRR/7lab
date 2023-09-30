@@ -1,4 +1,5 @@
 import commands.Save;
+import data.Difficulty;
 import managers.*;
 
 import java.io.*;
@@ -29,6 +30,7 @@ public class Server {
             DataBase dataBase = new DataBase("jdbc:postgresql://localhost:8080/studs", "s367128", "DzK7sCDJAPOPvHrb", collectionManager);
             dataBase.connectionToDataBase();
             dataBase.readToCollection();
+
 
             while (true){
                 Socket socket = serverSocket.accept();

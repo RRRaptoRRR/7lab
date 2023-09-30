@@ -40,8 +40,8 @@ public class DataBase {
     private static final String CURRENT_LABWORK_ID = "SELECT setval('labwork_seq', ?)";//"alter sequence labwork_seq restart with ?";
 
     private static final String DELETE_USER_REQUEST = "DROP FROM users WHERE username = ?";
-
     private static final String DELETE_ALL_lABWORKS_BY_USER_ID_REQUEST = "DELETE FROM labworks WHERE user_id = ?";
+    private static final String DELETE_ALL_BY_DIFFICULT = "delete from labworks where user_id = ? and difficulty = ?";
 
     public DataBase(String url, String username, String password, CollectionManager collectionManager){
         this.URL = url;
@@ -134,6 +134,23 @@ public class DataBase {
             logger.log(Level.INFO, "Команда на удаление labwork в БД не выполнена");
             return false;
         }
+    }
+
+    public boolean removeBydifficult(Difficulty difficulty, User user){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ALL_BY_DIFFICULT);
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setString(2, difficulty.toString());
+            preparedStatement.executeUpdate();
+            readToCollection();
+            return true;
+        }
+        catch (SQLException ex){
+            logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO,"Удалить не удалось");
+            return false;
+        }
+
     }
 
     public boolean addLabworkToDB(LabWork labWork, User user){

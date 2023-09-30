@@ -18,6 +18,35 @@ public class RemoveAllByDifficulty extends AbstractCollectionCommand {
     @Override
     public Result execute(String args, LabWork labWork, User user){
         if (args!= null){
+            if (collectionManager.getSize()!=0) {
+                Difficulty difficult = Difficulty.HARD;
+                boolean flag = true;
+                args = args.toUpperCase();
+                switch (args) {
+                    case "VERY_EASY":
+                        difficult = Difficulty.VERY_EASY;
+                        break;
+                    case "HARD":
+                        difficult = Difficulty.HARD;
+                        break;
+                    case "IMPOSSIBLE":
+                        difficult = Difficulty.IMPOSSIBLE;
+                        break;
+                    case "TERRIBLE":
+                        difficult = Difficulty.TERRIBLE;
+                        break;
+                    default:
+                        return new Result("Введена неверная сложность", true);
+                }
+                dataBase.removeBydifficult(difficult, user);
+                return new Result("Labwork с указанным Difficult были успешно удалены.", true);
+
+            }
+            else return new Result("Коллекция пуста", true);
+        }
+        else return new Result("Аргумент не введен", true);
+
+        /*if (args!= null){
             if (collectionManager.getSize()!=0){
                 Difficulty difficult = Difficulty.HARD;
                 boolean flag=true;
@@ -53,6 +82,6 @@ public class RemoveAllByDifficulty extends AbstractCollectionCommand {
             }
             else return new Result("Коллекция пуста", true);
         }
-        else return new Result("Аргумент не введен", true);
+        else return new Result("Аргумент не введен", true);*/
     }
 }
