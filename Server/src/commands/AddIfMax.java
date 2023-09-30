@@ -32,7 +32,7 @@ public class AddIfMax extends AbstractCollectionCommand{
         else return new Result("У данного labwork не максимальный MinimalPoint", false);
     }
 
-    public String executeFromScript(String args, BufferedReader csvReader){
+    public String executeFromScript(String args, BufferedReader csvReader, User user){
         try {
             String LabName = csvReader.readLine();
             int X = Integer.parseInt(csvReader.readLine());
@@ -66,7 +66,8 @@ public class AddIfMax extends AbstractCollectionCommand{
             LabWork laba = new LabWork(LabName, new Coordinates(X, Y), Point, Difficult,
                     new Person(PersonName, Height, Weight));
             if (laba.getMinimalPoint()>collectionManager.getMaxByPoints()){
-                collectionManager.add(laba);
+                //collectionManager.add(laba);
+                dataBase.addLabworkToDB(laba, user);
                 return "labwork успешно добавлен";
             }
             else {

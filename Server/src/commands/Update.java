@@ -60,19 +60,21 @@ public class Update extends AbstractCollectionCommand{
         lab.setAuthor(labWork.getAuthor());
     }
 
-    public String executeFromScript(String args, BufferedReader csvReader){
+    public String executeFromScript(String args, BufferedReader csvReader, User user){
         try{
             if (args!=null){
                 if (collectionManager.getSize()!=0){
                     long id = Long.parseLong(args);
-                    boolean flag=true;
+                    /*boolean flag=true;
                     for (LabWork labWork:collectionManager.getCollection()){
                         if (java.lang.Long.compare(labWork.getId(), id)==0){
                             //collectionManager.remove(labWork);
                             return updateFromScript(labWork, csvReader);
                         }
-                    }
-                    return ("В коллекции нет LabWork с таким id");
+                    }*/
+                    LabWork labWork = updateFromScript(csvReader);
+                    dataBase.update(id, labWork, user);
+                    return ("Labwork был усешно обновлен");
                 }
                 else{
                     return ("Коллекция пуста");
@@ -87,22 +89,19 @@ public class Update extends AbstractCollectionCommand{
         }
     }
 
-    public String updateFromScript(LabWork labWork, BufferedReader csvReader){
+    public LabWork updateFromScript(BufferedReader csvReader){
         try {
             String LabName = csvReader.readLine();
-            labWork.setName(LabName);
+            //labWork.setName(LabName);
             int X = Integer.parseInt(csvReader.readLine());
             int Y = Integer.parseInt(csvReader.readLine());
-            labWork.setCoordinates(new Coordinates(X, Y));
+            //labWork.setCoordinates(new Coordinates(X, Y));
             float Point = Float.parseFloat(csvReader.readLine());
             if (Point<=0){
                 throw new InvalidInputException("Кол-во баллов не может быть меньше или ровно 0");
             }
-            labWork.setMinimalPoint(Point);
-
-
+            //labWork.setMinimalPoint(Point);
             Difficulty Difficult = Difficulty.HARD;
-
             String difficult=csvReader.readLine().toUpperCase();
             switch (difficult){
                 case "VERY_EASY": Difficult = Difficulty.VERY_EASY; break;
@@ -112,11 +111,8 @@ public class Update extends AbstractCollectionCommand{
                 default:
                     throw new InvalidInputException("Введена неверная сложность");
             }
-
-            labWork.setDifficulty(Difficult);
-
+            //labWork.setDifficulty(Difficult);
             String PersonName=csvReader.readLine();
-
             long Height = Long.parseLong(csvReader.readLine());
             if(Height<=0){
                 throw new InvalidInputRangeException("Рост не может быть меньше или ровно  0");
@@ -127,20 +123,20 @@ public class Update extends AbstractCollectionCommand{
                 throw new InvalidInputRangeException("Вес не может быть меньше или ровно 0");
                 //consoleManager.print("Вес не может быть меньше 0");
             }
-            labWork.setAuthor( new Person(PersonName, Height, Weight));
-            return "Labwork был усешно обновлен";
+            //labWork.setAuthor( new Person(PersonName, Height, Weight));
+            LabWork laba = new LabWork(LabName, new Coordinates(X, Y), Point, Difficult, new Person(PersonName, Height, Weight));
+            return laba;
         }
         catch (IOException ex){
-            return ("данные не считались");
+            System.out.println("Данные не считались");
         }
         catch (InvalidInputException ex){
-            return (ex.getMessage());
+            System.out.println(ex.getMessage());
         }
         catch (InvalidInputRangeException ex){
-            return (ex.getMessage());
+             System.out.println(ex.getMessage());
         }
-
-
+        return null;
     }
 
 }

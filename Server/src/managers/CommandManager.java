@@ -108,8 +108,8 @@ public class CommandManager {
             case "help":  hist.add(help.getName()); return help.execute(args).getMessage();
             case "info":  hist.add(info.getName()); return info.execute(args).getMessage();
             case "show":  hist.add(show.getName()); return show.execute(args).getMessage();
-            case "add":  hist.add(add.getName()); return add.executeFromScript(args, csvReader);
-            case "update":  hist.add(update.getName()); return update.executeFromScript(args, csvReader);
+            case "add":  hist.add(add.getName()); return add.executeFromScript(args, csvReader, user);
+            case "update":  hist.add(update.getName()); return update.executeFromScript(args, csvReader, user);
             case "remove_by_id":  hist.add(removeById.getName()); return removeById.execute(args, labWork, user).getMessage();
             case "clear":  hist.add(clear.getName()); return clear.execute(args, labWork, user).getMessage();
             //case "read": read.execute(args); hist.add(read.getName()); break;
@@ -133,8 +133,8 @@ public class CommandManager {
                 }
 
             case "exit":  hist.add(exit.getName()); return exit.execute(args).getMessage();
-            case "add_if_max":  hist.add(addIfMin.getName()); return addIfMax.executeFromScript(args, csvReader);
-            case "add_if_min":  hist.add(addIfMax.getName()); return addIfMin.executeFromScript(args, csvReader);
+            case "add_if_max":  hist.add(addIfMin.getName()); return addIfMax.executeFromScript(args, csvReader, user);
+            case "add_if_min":  hist.add(addIfMax.getName()); return addIfMin.executeFromScript(args, csvReader, user);
             case "history":  hist.add(history.getName()); return history.execute(args).getMessage();
             case "remove_all_by_difficulty":  hist.add(removeAllByDifficulty.getName()); return removeAllByDifficulty.execute(args, labWork, user).getMessage();
             case "remove_any_by_minimal_point":  hist.add(removeAnyByMinimalPoint.getName()); return removeAnyByMinimalPoint.execute(args, labWork, user).getMessage();

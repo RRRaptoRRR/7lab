@@ -34,7 +34,7 @@ public class Add extends AbstractCollectionCommand{
 
     }
 
-    public String executeFromScript(String args, BufferedReader csvReader){
+    public String executeFromScript(String args, BufferedReader csvReader, User user){
         try {
             String LabName = csvReader.readLine();
             int X = Integer.parseInt(csvReader.readLine());
@@ -67,7 +67,8 @@ public class Add extends AbstractCollectionCommand{
             }
             LabWork laba = new LabWork(LabName, new Coordinates(X, Y), Point, Difficult,
                     new Person(PersonName, Height, Weight));
-            collectionManager.add(laba);
+            //collectionManager.add(laba);
+            dataBase.addLabworkToDB(laba, user);
             return "Labwork был успешно добавлен в коллекцию";
         }
         catch (IOException ex){

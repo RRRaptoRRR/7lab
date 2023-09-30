@@ -117,7 +117,8 @@ public class DataBase {
         }
         catch (SQLException ex){
             logger.log(Level.INFO, "Данный пользователь уже зарегистрирован");
-            logger.log(Level.INFO, ex.getMessage());
+            //RRRaptoRRR
+            //logger.log(Level.INFO, ex.getMessage());
             return false;
         }
     }

@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="remove_by_id">
+    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938/storage_v2/_src_/database/studs.ww2LBg/schema/s367128.tnmGHQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938/storage_v2/_src_/database/studs.ww2LBg/schema/s367128.tnmGHQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/commands/AddIfMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/AddIfMax.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/commands/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/AddIfMin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/commands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/Update.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/CommandManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/managers/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Задачи.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Задачи.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696071409658</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="update">
+      <created>1696072935699</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1696072935699</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,7 +331,8 @@
     <MESSAGE value="remove_all_by_difficulty" />
     <MESSAGE value="remove_any_by_minimal_point" />
     <MESSAGE value="remove_by_id" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove_by_id" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -334,7 +349,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Server/src/managers/DataBase.java</url>
-          <line>188</line>
+          <line>189</line>
           <properties class="managers.DataBase" method="update">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
