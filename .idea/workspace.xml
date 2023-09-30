@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="normall add to db">
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/AddIfMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/AddIfMax.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/AddIfMin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/Clear.java" afterDir="false" />
+    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="trying to make current id">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/managers/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/DataBase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +82,7 @@
       <recent name="commands" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="Client" />
@@ -245,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696016096519</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="trying to make current id">
+      <created>1696061864431</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1696061864431</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,7 +283,8 @@
     <MESSAGE value="password &amp; MD5" />
     <MESSAGE value="sequence to id" />
     <MESSAGE value="normall add to db" />
-    <option name="LAST_COMMIT_MESSAGE" value="normall add to db" />
+    <MESSAGE value="trying to make current id" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying to make current id" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -294,7 +299,21 @@
           <line>40</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Server/src/managers/DataBase.java</url>
+          <line>219</line>
+          <properties class="managers.DataBase" method="setCurrentLabworkId">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="this" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

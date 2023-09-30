@@ -7,6 +7,7 @@ import data.Person;
 import exceptions.InvalidInputException;
 import org.postgresql.util.MD5Digest;
 
+import java.math.BigInteger;
 import java.sql.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -34,6 +35,9 @@ public class DataBase {
     private static final String USER_ID_REQUEST = "SELECT id FROM users WHERE username = ?";
 
     private static final String CHECK_USER_REQUEST = "SELECT id FROM users WHERE username = ? AND password = ?";
+
+    private static final String MAX_ID_IN_LABWORKS ="select max(id) from labworks";
+    private static final String CURRENT_LABWORK_ID = "SELECT setval('labwork_seq', ?)";//"alter sequence labwork_seq restart with ?";
 
     private static final String DELETE_USER_REQUEST = "DROP FROM users WHERE username = ?";
 
@@ -68,6 +72,7 @@ public class DataBase {
                 collectionManager.add(labWork);
             }
             logger.log(Level.INFO, "Прочитал данные из БД");
+            setCurrentLabworkId();
             return true;
         }
         catch (SQLException ex){
@@ -192,5 +197,40 @@ public class DataBase {
         LabWork labWork = new LabWork(id, name, coordinates, zonedDateTime, minimalPoint, Difficult, person);
         logger.log(Level.INFO, "Прочитал строку из БД");
         return labWork;
+    }
+
+    public int maxIdInCollection(){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(MAX_ID_IN_LABWORKS);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            Integer id= resultSet.getInt(1);
+
+            logger.log(Level.INFO, "Текущий id = "+ id);
+            return id;
+
+        }
+        catch (SQLException ex){
+            logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO, "hernya");
+            return -1;
+        }
+    }
+
+    public void setCurrentLabworkId(){
+        try {
+            Integer id = maxIdInCollection();
+            if (id <=0) id = 1;
+            PreparedStatement preparedStatement = connection.prepareStatement(CURRENT_LABWORK_ID);
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            logger.log(Level.INFO, "Удалось успешно обновить id");
+        }
+        catch (SQLException ex){
+            logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO, "Id не обновлен");
+        }
+
     }
 }
