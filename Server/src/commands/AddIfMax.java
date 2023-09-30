@@ -24,7 +24,7 @@ public class AddIfMax extends AbstractCollectionCommand{
     public Result execute(String args, LabWork labWork, User user){
         if (labWork.getMinimalPoint()>=collectionManager.getMaxByPoints()){
             if(dataBase.addLabworkToDB(labWork, user)){
-                this.collectionManager.add(labWork);
+                //this.collectionManager.add(labWork);
                 return new Result("Labwork был успешно добавлен в коллекцию", true);
             }
             return new Result("Labwork не был добавлен в коллекцию, т.к. такой уже существует", true);

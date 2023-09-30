@@ -59,27 +59,12 @@ public class DataBase {
 
     public Boolean readToCollection(){
         try {
+            collectionManager.clear();
             logger.log(Level.INFO, "Начинаю читать данные из БД");
             PreparedStatement preparedStatement = connection.prepareStatement(READ_DB);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                long id = (long) resultSet.getInt(1);
-                String name = resultSet.getString(2);
-                Coordinates coordinates = new Coordinates(resultSet.getInt(3), resultSet.getInt(4));
-                ZonedDateTime zonedDateTime = resultSet.getTimestamp(5).toLocalDateTime().atZone(ZoneId.systemDefault());
-                Float minimalPoint = resultSet.getFloat(6);
-                String difficult = resultSet.getString(7).toUpperCase();
-                Difficulty Difficult = Difficulty.HARD;
-                switch (difficult){
-                    case "VERY_EASY": Difficult = Difficulty.VERY_EASY; break;
-                    case "HARD": Difficult = Difficulty.HARD; break;
-                    case "IMPOSSIBLE": Difficult = Difficulty.IMPOSSIBLE; break;
-                    case "TERRIBLE": Difficult = Difficulty.TERRIBLE; break;
-                    default:
-                        Difficult = Difficulty.HARD;
-                }
-                Person person = new Person(resultSet.getString(8), resultSet.getLong(9), resultSet.getInt(10));
-                LabWork labWork = new LabWork(id, name, coordinates, zonedDateTime, minimalPoint, Difficult, person);
+                LabWork labWork = readOneLabwork(resultSet);
                 collectionManager.add(labWork);
             }
             logger.log(Level.INFO, "Прочитал данные из БД");
@@ -129,12 +114,13 @@ public class DataBase {
         }
     }
 
-    public boolean removeLabworkFromDB(LabWork labWork, User user){
+    public boolean removeAllLabworkByUserIdFromDB(LabWork labWork, User user){
         try {
             logger.log(Level.INFO, "Получена команда на очистку labworks в БД");
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ALL_lABWORKS_BY_USER_ID_REQUEST);
             preparedStatement.setInt(1, user.getId());
             preparedStatement.executeUpdate();
+            readToCollection();
             logger.log(Level.INFO, "Команда на удаление labworks в БД выполнена успешно");
             return true;
         }
@@ -160,6 +146,7 @@ public class DataBase {
             preparedStatement.setLong(9, labWork.getAuthor().getHeight());
             preparedStatement.setInt(10, user.getId());
             preparedStatement.executeUpdate();
+            readToCollection();
             logger.log(Level.INFO, "Команда на добавление labwork в БД выполнена успешно");
             return true;
         }
@@ -183,5 +170,27 @@ public class DataBase {
             logger.log(Level.INFO, "Пользователя с таким логином не существует");
             return false;
         }
+    }
+
+    public LabWork readOneLabwork(ResultSet resultSet) throws SQLException{
+        long id = (long) resultSet.getInt(1);
+        String name = resultSet.getString(2);
+        Coordinates coordinates = new Coordinates(resultSet.getInt(3), resultSet.getInt(4));
+        ZonedDateTime zonedDateTime = resultSet.getTimestamp(5).toLocalDateTime().atZone(ZoneId.systemDefault());
+        Float minimalPoint = resultSet.getFloat(6);
+        String difficult = resultSet.getString(7).toUpperCase();
+        Difficulty Difficult = Difficulty.HARD;
+        switch (difficult){
+            case "VERY_EASY": Difficult = Difficulty.VERY_EASY; break;
+            case "HARD": Difficult = Difficulty.HARD; break;
+            case "IMPOSSIBLE": Difficult = Difficulty.IMPOSSIBLE; break;
+            case "TERRIBLE": Difficult = Difficulty.TERRIBLE; break;
+            default:
+                Difficult = Difficulty.HARD;
+        }
+        Person person = new Person(resultSet.getString(8), resultSet.getLong(9), resultSet.getInt(10));
+        LabWork labWork = new LabWork(id, name, coordinates, zonedDateTime, minimalPoint, Difficult, person);
+        logger.log(Level.INFO, "Прочитал строку из БД");
+        return labWork;
     }
 }

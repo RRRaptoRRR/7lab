@@ -14,7 +14,7 @@ public class Clear extends AbstractCollectionCommand{
 
     @Override
     public Result execute(String args, LabWork labWork, User user){
-        collectionManager.clear();
+        dataBase.removeAllLabworkByUserIdFromDB(labWork, user);
         return new Result("Коллекция успешно очищена", true);
     }
 }
