@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="sucsess current id">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938/storage_v2/_src_/database/studs.ww2LBg/schema/s367128.tnmGHQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938/storage_v2/_src_/database/studs.ww2LBg/schema/s367128.tnmGHQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/RemoveAllByDifficulty.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/RemoveAllByDifficulty.java" afterDir="false" />
+    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="remove_all_by_difficulty">
+      <change beforePath="$PROJECT_DIR$/Server/src/commands/RemoveAnyByMinimalPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/RemoveAnyByMinimalPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/managers/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/DataBase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -260,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696064716375</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="remove_all_by_difficulty">
+      <created>1696067674999</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1696067674999</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +299,8 @@
     <MESSAGE value="normall add to db" />
     <MESSAGE value="trying to make current id" />
     <MESSAGE value="sucsess current id" />
-    <option name="LAST_COMMIT_MESSAGE" value="sucsess current id" />
+    <MESSAGE value="remove_all_by_difficulty" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove_all_by_difficulty" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -313,7 +317,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Server/src/managers/DataBase.java</url>
-          <line>236</line>
+          <line>252</line>
           <properties class="managers.DataBase" method="setCurrentLabworkId">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

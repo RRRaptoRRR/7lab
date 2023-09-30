@@ -18,13 +18,14 @@ public class RemoveAnyByMinimalPoint extends AbstractCollectionCommand{
             if(args!=null){
                 if (collectionManager.getSize()!=0){
                     float minPoint = Float.parseFloat(args);
-                    for(LabWork lab:collectionManager.getCollection()){
+                    /*for(LabWork lab:collectionManager.getCollection()){
                         if(lab.getMinimalPoint()==minPoint){
                             collectionManager.remove(lab);
                             return new Result("LabWork с таким же MinimalPoint был успешно удален. \n Вот, что было удалено\n"+ lab.toString(), true);
                         }
-                    }
-                    return new Result("В коллекции нет LabWork с таким же MinimalPoint", true);
+                    }*/
+                    dataBase.removeAnyByMinPoint(minPoint, user);
+                    return new Result("LabWork с таким же MinimalPoint был успешно удален", true);
                 }
                 else {
                     return new Result("Коллекцимя пуста", true);
