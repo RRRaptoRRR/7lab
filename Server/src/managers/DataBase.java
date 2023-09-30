@@ -43,6 +43,7 @@ public class DataBase {
     private static final String DELETE_ALL_lABWORKS_BY_USER_ID_REQUEST = "DELETE FROM labworks WHERE user_id = ?";
     private static final String DELETE_ALL_BY_DIFFICULT = "delete from labworks where user_id = ? and difficulty = ?";
     private static final String DELETE_ANY_BY_MINPOINT = "delete from labworks where minimalPoint in(select minimalPoint from labworks where minimalPoint = ? limit 1) and user_id in (select user_id from labworks where user_id = ? limit 1)";
+    private static final String DELETE_BY_ID = "delete from labworks where id = ? and user_id = ?";
 
     public DataBase(String url, String username, String password, CollectionManager collectionManager){
         this.URL = url;
@@ -165,6 +166,22 @@ public class DataBase {
         catch (SQLException ex){
             logger.log(Level.INFO, ex.getMessage());
             logger.log(Level.INFO, "Удалить по minpoint не удалось");
+            return false;
+        }
+    }
+
+    public boolean removeById(long id, User user){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setInt(1, (int) id);
+            preparedStatement.setInt(2, user.getId());
+            preparedStatement.executeUpdate();
+            readToCollection();
+            return true;
+        }
+        catch (SQLException ex){
+            logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO, "удалить по id не удалось");
             return false;
         }
     }

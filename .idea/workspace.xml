@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="remove_all_by_difficulty">
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/RemoveAnyByMinimalPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/RemoveAnyByMinimalPoint.java" afterDir="false" />
+    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="remove_any_by_minimal_point">
+      <change beforePath="$PROJECT_DIR$/Server/src/commands/RemoveById.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/RemoveById.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/managers/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/DataBase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -263,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696067674999</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="remove_any_by_minimal_point">
+      <created>1696070703827</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1696070703827</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +307,8 @@
     <MESSAGE value="trying to make current id" />
     <MESSAGE value="sucsess current id" />
     <MESSAGE value="remove_all_by_difficulty" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove_all_by_difficulty" />
+    <MESSAGE value="remove_any_by_minimal_point" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove_any_by_minimal_point" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -317,7 +325,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Server/src/managers/DataBase.java</url>
-          <line>252</line>
+          <line>269</line>
           <properties class="managers.DataBase" method="setCurrentLabworkId">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
