@@ -20,8 +20,9 @@ public class ConsoleManager {
     private ObjectOutputStream objectOutputStream;
 
     private ObjectInputStream objectInputStream;
+    private User user;
 
-    public ConsoleManager(Scanner scanner, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) throws IOException{
+    public ConsoleManager(Scanner scanner, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream, User user) throws IOException{
 
         //this.objectInputStream = new ObjectInputStream(inputStream);
         //this.objectOutputStream = new ObjectOutputStream(outputStream);
@@ -29,6 +30,7 @@ public class ConsoleManager {
         this.objectOutputStream = objectOutputStream;
         this.scanner=scanner;
         this.dataAsker = new DataAsker(this);
+        this.user = user;
         start();
     }
     public  void start(){//CommandManager commandManager){
@@ -184,6 +186,13 @@ public class ConsoleManager {
                 InputStream inputStream = socket.getInputStream();
                 this.objectInputStream = new ObjectInputStream(inputStream);
                 this.objectOutputStream = new ObjectOutputStream(outputStream);
+                objectOutputStream.writeObject(user);
+                try {
+                    objectInputStream.readObject();
+                }
+                catch (ClassNotFoundException ex){
+                    print("vso ploho");
+                }
                 print("Удалось переподключится к серверу");
                 return true;
             }

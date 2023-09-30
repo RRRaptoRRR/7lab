@@ -2,6 +2,7 @@ import com.sun.tools.javac.Main;
 import managers.ConsoleManager;
 import managers.DataAsker;
 import managers.Entrance;
+import managers.User;
 
 import java.io.*;
 import java.net.Socket;
@@ -35,8 +36,8 @@ public class Client {
             ObjectInputStream objectInputStream= new ObjectInputStream(inputStream);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             this.entrance = new Entrance(scanner, objectInputStream, objectOutputStream);
-            entrance.start();
-            this.consoleManager = new ConsoleManager(scanner, objectInputStream, objectOutputStream);
+            User user= entrance.start();
+            this.consoleManager = new ConsoleManager(scanner, objectInputStream, objectOutputStream, user);
             this.dataAsker = new DataAsker(consoleManager);
             outputStream.close();
             inputStream.close();

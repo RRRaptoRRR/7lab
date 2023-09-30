@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938/storage_v2/_src_/database/studs.ww2LBg/schema/s367128.tnmGHQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b4d3fb0-bdde-4294-bb29-7e62e5e0a938/storage_v2/_src_/database/studs.ww2LBg/schema/s367128.tnmGHQ.meta" afterDir="false" />
+    <list default="true" id="366942fe-977a-418e-8d1e-c4e242a55109" name="Changes" comment="scripts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/AddIfMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/AddIfMax.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/AddIfMin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/commands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/commands/Update.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/managers/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/managers/DataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Задачи.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Задачи.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/managers/ConsoleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/managers/ConsoleManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/managers/Entrance.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/managers/Entrance.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696072935699</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="scripts">
+      <created>1696084777697</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1696084777697</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,14 +333,15 @@
     <MESSAGE value="remove_any_by_minimal_point" />
     <MESSAGE value="remove_by_id" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Client/src/managers/ConsoleManager.java</url>
-          <line>58</line>
+          <line>60</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

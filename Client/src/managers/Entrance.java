@@ -15,23 +15,25 @@ public class Entrance {
         this.objectOutputStream = objectOutputStream;
         this.scanner = scanner;
     }
-    public void start() throws IOException{
+    public User start() throws IOException{
         System.out.println("Для доступа к коллекции вы должны аторизоваться/зарегестрироваться");
 
         boolean flag=true;
         String answer;
+        User user = null;
 
         while (flag){
             System.out.println("Выберете действие, которое хотите совершить: Sign(in/up)");
             answer = scanner.nextLine();
             switch (answer){
-                case "in": signIn(); flag =false; break;
-                case "up": signUp(); flag = false; break;
+                case "in": user=signIn(); flag =false; break;
+                case "up": user = signUp(); flag = false; break;
             }
         }
+        return user;
     }
 
-    public void signIn() throws IOException{
+    public User signIn() throws IOException{
         String login = requestLogin();
         String password = requestPassword();
         User user = new User(login, password, true);
@@ -50,14 +52,16 @@ public class Entrance {
         //System.out.println("Я получил result");
         if(result){
             System.out.println("Вы успешно вошли в систему");
+            return user;
         }
         else {
             System.out.println("Неверно указан логин/пароль");
             start();
+            return null;
         }
     }
 
-    public void signUp() throws IOException{
+    public User signUp() throws IOException{
         String login = requestLogin();
         String password = requestPassword();
         User user = new User(login, password, false);
@@ -74,10 +78,12 @@ public class Entrance {
         //System.out.println("Я получил result");
         if(result){
             System.out.println("Вы зарегистрировались");
+            return user;
         }
         else {
             System.out.println("Пользователь с таким логином уже существует");
             start();
+            return null;
         }
         //objectOutputStream.flush();
     }
