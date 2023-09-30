@@ -44,6 +44,7 @@ public class DataBase {
     private static final String DELETE_ALL_BY_DIFFICULT = "delete from labworks where user_id = ? and difficulty = ?";
     private static final String DELETE_ANY_BY_MINPOINT = "delete from labworks where minimalPoint in(select minimalPoint from labworks where minimalPoint = ? limit 1) and user_id in (select user_id from labworks where user_id = ? limit 1)";
     private static final String DELETE_BY_ID = "delete from labworks where id = ? and user_id = ?";
+    private static final String UPDATE = "update labworks set name =?, x = ?, y=?, minimalPoint =?, difficulty =?, person_name =?, height = ?, weight = ? where id = ? and user_id =?";
 
     public DataBase(String url, String username, String password, CollectionManager collectionManager){
         this.URL = url;
@@ -182,6 +183,31 @@ public class DataBase {
         catch (SQLException ex){
             logger.log(Level.INFO, ex.getMessage());
             logger.log(Level.INFO, "удалить по id не удалось");
+            return false;
+        }
+    }
+    public boolean update(long id, LabWork labWork, User user){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setString(1, labWork.getName());
+            preparedStatement.setInt(2, labWork.getCoordinates().getX());
+            preparedStatement.setInt(3, labWork.getCoordinates().getY());
+            //preparedStatement.setTimestamp(4, Timestamp.valueOf(labWork.getCreationDate().toLocalDateTime()));
+            preparedStatement.setFloat(4, labWork.getMinimalPoint());
+            preparedStatement.setString(5, labWork.getDifficulty().toString());
+            preparedStatement.setString(6, labWork.getAuthor().getName());
+            preparedStatement.setLong(7, labWork.getAuthor().getHeight());
+            preparedStatement.setLong(8, labWork.getAuthor().getHeight());
+            preparedStatement.setInt(9, (int) id);
+            preparedStatement.setInt(10, user.getId());
+            preparedStatement.executeUpdate();
+            readToCollection();
+            logger.log(Level.INFO, "vso ok");
+            return true;
+        }
+        catch (SQLException ex){
+            logger.log(Level.INFO, ex.getMessage());
+            logger.log(Level.INFO, "не удалось обновить  ");
             return false;
         }
     }

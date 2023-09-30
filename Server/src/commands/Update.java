@@ -29,15 +29,16 @@ public class Update extends AbstractCollectionCommand{
             if(args!=null){
                 if (collectionManager.getSize()!=0){
                     long id = Long.parseLong(args);
-                    for (LabWork lab:collectionManager.getCollection()){
+                    /*for (LabWork lab:collectionManager.getCollection()){
                         if (java.lang.Long.compare(lab.getId(), id)==0){
                             //collectionManager.remove(labWork);
                             update(lab, labWork);
                             return new Result("Labwork был усешно обновлен", true);
 
                         }
-                    }
-                    return new Result("В коллекции нет LabWork с таким id", false);
+                    }*/
+                    dataBase.update(id, labWork, user);
+                    return new Result("Labwork был усешно обновлен", true);
 
                 }
                 else return new Result("Коллекция пуста", false);
