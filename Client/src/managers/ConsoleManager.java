@@ -110,6 +110,7 @@ public class ConsoleManager {
             objectOutputStream.writeObject(command);
             //objectOutputStream.flush();
             getFromServer();
+            objectOutputStream.flush();
         }
         catch (IOException ex){
             print("Сервер упал :(");
@@ -133,7 +134,9 @@ public class ConsoleManager {
 
     public void getFromServer(){
         try {
+
             Result result = (Result) objectInputStream.readObject();
+
             print(result.getMessage());
             if (!result.getResult()){
                 LabWork.reduceId();
