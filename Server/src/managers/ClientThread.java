@@ -8,9 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -101,10 +99,9 @@ public class ClientThread extends Thread{
                                 objectOutputStream.writeObject(result);
                             }
                         }
-
-
                     }
                     catch (IOException ex){
+
                         logger.log(Level.INFO, "Net prihoda");
                     }
                     catch (InterruptedException ex){
@@ -113,7 +110,38 @@ public class ClientThread extends Thread{
 
                 }
             }).start();
-            Command command = new Command("", "", null);
+            Thread executeThread = new Thread(()->{
+                Command command = new Command("", "", null);
+                Result result;
+                while (true){
+                    logger.log(Level.INFO, "Нахожусь в обработке запроса");
+                    try {
+                        command = queueToProcess.take();
+                    }
+                    catch (InterruptedException ex){
+                        logger.log(Level.INFO, ex.getMessage());
+                    }
+                    if (!command.equals(null)){
+                        if (!command.getName().equals("")){
+                            logger.log(Level.INFO, "Получено сообщение от пользователя: "+ command.toString());
+                            logger.log(Level.INFO, "Начато выполнение команды "+ command.getName());
+                            result =commandManager.RunCommand(command.getName(), command.getArgs(), command.getLabWork());
+                            queueToSend.add(result);
+                            logger.log(Level.INFO, "Команда " + command.getName() + " исполнена, передача ее результатов клиенту");
+                            //objectOutputStream.writeObject(result);
+                            //objectOutputStream.flush();
+
+                            if (command.getName().equals("exit")){
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            });
+            ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+            executor.execute(executeThread);
+            /*Command command = new Command("", "", null);
             Result result;
             while (true){
                 logger.log(Level.INFO, "Нахожусь в обработке запроса");
@@ -138,12 +166,14 @@ public class ClientThread extends Thread{
                         }
                     }
                 }
+            }*/
+            while (true){
 
             }
-            logger.log(Level.INFO, "Сервер прекратил свою работу");
+            /*logger.log(Level.INFO, "Сервер прекратил свою работу");
             objectInputStream.close();
             objectOutputStream.close();
-            socket.close();
+            socket.close();*/
         }
         catch (IOException ex){
             logger.log(Level.INFO, "Net prihoda");

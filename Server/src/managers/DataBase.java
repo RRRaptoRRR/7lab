@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.sql.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +26,7 @@ public class DataBase {
 
     private CollectionManager collectionManager;
 
-
+    private ReentrantLock reentrantLock;
 
     private static final String ADD_USER_REQUEST = "INSERT INTO users  VALUES (nextval('user_seq'), ?, ?)";
 
@@ -52,6 +53,7 @@ public class DataBase {
         this.adminPassword = password;
         logger = Logger.getLogger(DataBase.class.getName());
         this.collectionManager = collectionManager;
+        this.reentrantLock = new ReentrantLock();
     }
 
     public void connectionToDataBase(){
@@ -65,6 +67,7 @@ public class DataBase {
     }
 
     public Boolean readToCollection(){
+        reentrantLock.lock();
         try {
             collectionManager.clear();
             logger.log(Level.INFO, "Начинаю читать данные из БД");
@@ -83,10 +86,13 @@ public class DataBase {
             logger.log(Level.INFO, "Не удалось прочитать данные из БД");
             return false;
         }
+        finally {
+            reentrantLock.unlock();
+        }
     }
 
     public boolean isUserRegistred(User user) throws SQLException{
-
+        reentrantLock.lock();
         PreparedStatement preparedStatement = connection.prepareStatement(CHECK_USER_REQUEST);
         preparedStatement.setString(1, user.getUsername());
         preparedStatement.setString(2, MD5Hash.getMD5Hash(user.getPassword()));
@@ -95,12 +101,15 @@ public class DataBase {
             logger.log(Level.INFO, "Пользователь с логином " +user.getUsername()+" существует, все ок");
             user.setId(resultSet.getInt(1));
             logger.log(Level.INFO, "Теперь у пользователя id = "+user.getId());
+            reentrantLock.unlock();
             return true;
         }
+        reentrantLock.unlock();
         return false;
     }
 
     public boolean toRegistreUser(User user){
+        reentrantLock.lock();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_USER_REQUEST);
             preparedStatement.setString(1, user.getUsername());
@@ -113,17 +122,23 @@ public class DataBase {
             resultSet.next();
             user.setId(resultSet.getInt(1));
             logger.log(Level.INFO, "Теперь у пользователя id = "+user.getId());
+            reentrantLock.unlock();
             return true;
         }
         catch (SQLException ex){
             logger.log(Level.INFO, "Данный пользователь уже зарегистрирован");
             //RRRaptoRRR
             //logger.log(Level.INFO, ex.getMessage());
+            reentrantLock.unlock();
             return false;
+        }
+        finally {
+            reentrantLock.unlock();
         }
     }
 
     public boolean removeAllLabworkByUserIdFromDB(LabWork labWork, User user){
+        reentrantLock.lock();
         try {
             logger.log(Level.INFO, "Получена команда на очистку labworks в БД");
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ALL_lABWORKS_BY_USER_ID_REQUEST);
@@ -131,22 +146,29 @@ public class DataBase {
             preparedStatement.executeUpdate();
             readToCollection();
             logger.log(Level.INFO, "Команда на удаление labworks в БД выполнена успешно");
+            reentrantLock.unlock();
             return true;
         }
         catch (SQLException ex){
             logger.log(Level.INFO, ex.getMessage());
             logger.log(Level.INFO, "Команда на удаление labwork в БД не выполнена");
+            reentrantLock.unlock();
             return false;
+        }
+        finally {
+            reentrantLock.unlock();
         }
     }
 
     public boolean removeBydifficult(Difficulty difficulty, User user){
+        reentrantLock.lock();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ALL_BY_DIFFICULT);
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setString(2, difficulty.toString());
             preparedStatement.executeUpdate();
             readToCollection();
+            reentrantLock.unlock();
             return true;
         }
         catch (SQLException ex){
@@ -154,9 +176,13 @@ public class DataBase {
             logger.log(Level.INFO,"Удалить не удалось");
             return false;
         }
+        finally {
+            reentrantLock.unlock();
+        }
 
     }
     public boolean removeAnyByMinPoint(float minpoint, User user){
+        reentrantLock.lock();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ANY_BY_MINPOINT);
             preparedStatement.setFloat(1, minpoint);
@@ -170,9 +196,13 @@ public class DataBase {
             logger.log(Level.INFO, "Удалить по minpoint не удалось");
             return false;
         }
+        finally {
+            reentrantLock.unlock();
+        }
     }
 
     public boolean removeById(long id, User user){
+        reentrantLock.lock();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
             preparedStatement.setInt(1, (int) id);
@@ -186,8 +216,12 @@ public class DataBase {
             logger.log(Level.INFO, "удалить по id не удалось");
             return false;
         }
+        finally {
+            reentrantLock.unlock();
+        }
     }
     public boolean update(long id, LabWork labWork, User user){
+        reentrantLock.lock();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
             preparedStatement.setString(1, labWork.getName());
@@ -211,9 +245,13 @@ public class DataBase {
             logger.log(Level.INFO, "не удалось обновить  ");
             return false;
         }
+        finally {
+            reentrantLock.unlock();
+        }
     }
 
     public boolean addLabworkToDB(LabWork labWork, User user){
+        reentrantLock.lock();
         try {
             logger.log(Level.INFO, "Получена команда на добавление labwork в БД");
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_LABWORK_REQUEST);
@@ -237,6 +275,9 @@ public class DataBase {
             logger.log(Level.INFO, "Команда на добавление labwork в БД не выполнена");
             return false;
         }
+        finally {
+            reentrantLock.unlock();
+        }
 
     }
     public boolean toDropUser(User user) {
@@ -255,6 +296,7 @@ public class DataBase {
     }
 
     public LabWork readOneLabwork(ResultSet resultSet) throws SQLException{
+        reentrantLock.lock();
         long id = (long) resultSet.getInt(1);
         String name = resultSet.getString(2);
         Coordinates coordinates = new Coordinates(resultSet.getInt(3), resultSet.getInt(4));
@@ -273,10 +315,13 @@ public class DataBase {
         Person person = new Person(resultSet.getString(8), resultSet.getLong(9), resultSet.getInt(10));
         LabWork labWork = new LabWork(id, name, coordinates, zonedDateTime, minimalPoint, Difficult, person);
         logger.log(Level.INFO, "Прочитал строку из БД");
+        reentrantLock.unlock();
         return labWork;
+
     }
 
     public int maxIdInCollection(){
+        reentrantLock.lock();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(MAX_ID_IN_LABWORKS);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -292,9 +337,13 @@ public class DataBase {
             logger.log(Level.INFO, "hernya");
             return -1;
         }
+        finally {
+            reentrantLock.unlock();
+        }
     }
 
     public void setCurrentLabworkId(){
+        reentrantLock.lock();
         try {
             Integer id = maxIdInCollection();
             if (id <=0) id = 1;
@@ -307,6 +356,9 @@ public class DataBase {
         catch (SQLException ex){
             logger.log(Level.INFO, ex.getMessage());
             logger.log(Level.INFO, "Id не обновлен");
+        }
+        finally {
+            reentrantLock.unlock();
         }
 
     }
